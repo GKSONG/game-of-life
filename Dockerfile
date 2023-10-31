@@ -11,7 +11,9 @@ RUN mvn clean package
 
 # 2. RUN Stage
 FROM jetty:9.4-jdk8-amazoncorretto
+USER root
 RUN usermod -aG sudo jetty
+USER jetty
 COPY --from=build /app/gameoflife-web/target/gameoflife.war /var/lib/jetty/webapps/ROOT.war
 EXPOSE 8080
 CMD ["java", "-jar", "/usr/local/jetty/start.jar"]
