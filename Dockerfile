@@ -3,7 +3,11 @@ FROM maven:3.5.4-jdk-8-slim AS build
 USER root
 WORKDIR /app
 COPY pom.xml /app/pom.xml
-COPY src /app/src
+COPY gameoflife-acceptance-tests/ /app/gameoflife-acceptance-tests/
+COPY gameoflife-build/ /app/gameoflife-build/
+COPY gameoflife-core/ /app/gameoflife-core/
+COPY gameoflife-deploy/ /app/gameoflife-deploy/
+COPY gameoflife-web/ /app/gameoflife-web/
 RUN mvn clean package
 
 # 2. RUN Stage
