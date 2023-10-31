@@ -13,5 +13,5 @@ RUN mvn clean package
 # 2. RUN Stage
 FROM jetty:9.4-jdk8-amazoncorretto
 COPY --from=build /app/gameoflife-web/target/gameoflife.war /var/lib/jetty/webapps/ROOT.war
-EXPOSE 9090
-ENTRYPOINT ["java", "-jar", "/usr/local/jetty/start.jar"]
+EXPOSE 8080
+RUN ["java", "-jar", "/usr/local/jetty/start.jar"]

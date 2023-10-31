@@ -12,7 +12,7 @@
     <name>gameoflife-web</name>
 
     <properties>
-        <jetty.port>9090</jetty.port>
+        <jetty.port>8080</jetty.port>
         <jetty.stop.port>9999</jetty.stop.port>
     </properties>
 
