@@ -10,9 +10,8 @@ COPY gameoflife-web/ /app/gameoflife-web/
 RUN mvn clean package
 
 # 2. RUN Stage
-FROM jetty:9.4-jdk8-alpine-amazoncorretto
+FROM jetty:9.4-jdk8
 COPY --from=build /app/gameoflife-web/target/gameoflife.war /var/lib/jetty/webapps/ROOT.war
 EXPOSE 8080
-USER root
-CMD ["java", "-jar", "/usr/local/jetty/start.jar"]
-USER jetty
+CMD ["/bin/sh", "-ec", "while :; do echo 'Hello SONGGK'; sleep 5 ; done"]
+# CMD ["java", "-jar", "/usr/local/jetty/start.jar"]
