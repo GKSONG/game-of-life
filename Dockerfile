@@ -1,5 +1,7 @@
 # 1. BUILD stage
 FROM maven:3.5.4-jdk-8-slim AS build
+RUN groupadd -r jetty && useradd -r -g jetty jetty
+USER jetty
 WORKDIR /app
 COPY pom.xml /app/pom.xml
 COPY gameoflife-acceptance-tests/ /app/gameoflife-acceptance-tests/
@@ -12,8 +14,6 @@ RUN mvn clean package
 # 2. RUN Stage
 FROM jetty:9.4-jdk8
 COPY --from=build /app/gameoflife-web/target/gameoflife.war /var/lib/jetty/webapps/ROOT.war
-USER root
 RUN chown jetty:jetty /var/lib/jetty/webapps/ROOT.war
-USER jetty
 EXPOSE 8080
 CMD ["java", "-jar", "/usr/local/jetty/start.jar"]
