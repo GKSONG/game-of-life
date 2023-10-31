@@ -10,7 +10,7 @@ COPY gameoflife-web/ /app/gameoflife-web/
 RUN mvn clean package
 
 # 2. RUN Stage
-FROM jetty:9.4-jdk8-amazoncorretto
+FROM jetty:9.4-jdk8-alpine-amazoncorretto
 COPY --from=build /app/gameoflife-web/target/gameoflife.war /var/lib/jetty/webapps/ROOT.war
 EXPOSE 8080
 USER root
